@@ -1,30 +1,19 @@
 <template>
   <div id="nc-dest">
-    <Form :title="form.title" :color="form.color" v-for="form in forms" :key="form.title"/>
+    <Item :item="item" v-for="item in items" :key="item.id"/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Form from "@/components/dest/Form.vue";
+import {mapState} from 'vuex'
+import Item from "@/components/dest/Item.vue";
 
 export default {
   name: "Dest",
   components: {
-    Form
+    Item
   },
-  data: () => ({
-      forms: [
-        {
-          title: "投保单位联系人信息",
-          color: "orange"
-        },
-        {
-          title: "法人代表/负责人信息",
-          color: "orange"
-        }
-      ]
-    })
+  computed: mapState(['items']),
 };
 </script>
 
