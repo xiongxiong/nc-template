@@ -67,6 +67,7 @@ export default {
   flex: 1;
   display: flex;
   margin: 4px;
+  overflow: hiddden;
 }
 
 #nc-container-footer {

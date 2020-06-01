@@ -1,16 +1,16 @@
 <template>
   <div id="nc-editor-item">
     <div id="nc-editor-item-header">
-      <a-select id="nc-editor-item-type" :default-value="type" @change="changeType">
-        <a-select-option :value="type" v-for="t in types" :key="t">{{t}}</a-select-option>
+      <a-select id="nc-editor-item-type" :default-value="type" @change="(type) => updateItem({item: {...item, type}})">
+        <a-select-option :value="t" v-for="t in types" :key="t">{{t}}</a-select-option>
       </a-select>
       <Spacer />
-      <a-button type="link" icon="vertical-align-top" size="default" @click="insertItemUp"/>
-      <a-button type="link" icon="vertical-align-bottom" size="default" @click="insertItemDown"/>
-      <a-button type="link" icon="arrow-up" size="default" @click="moveItemUp"/>
-      <a-button type="link" icon="arrow-down" size="default" @click="moveItemDown"/>
-      <a-button type="link" icon="copy" size="default" @click="copyItem"/>
-      <a-button type="link" icon="delete" size="default" @click="deleteItem"/>
+      <a-button type="link" icon="vertical-align-top" size="default" @click="insertItemUp({item})"/>
+      <a-button type="link" icon="vertical-align-bottom" size="default" @click="insertItemDown({item})"/>
+      <a-button type="link" icon="arrow-up" size="default" @click="moveItemUp({item})"/>
+      <a-button type="link" icon="arrow-down" size="default" @click="moveItemDown({item})"/>
+      <a-button type="link" icon="copy" size="default" @click="copyItem({item})"/>
+      <a-button type="link" icon="delete" size="default" @click="deleteItem({item})"/>
     </div>
     <Divider />
     <Form v-if="type === 'form'"/>
@@ -35,27 +35,21 @@ export default {
     Card,
   },
   props: {
-    item: {
-      type: Object,
-      default: () => ({})
-    },
+    item: Object,
   },
   data () {
     return {
-      theItem: {type: "form"}
+      
     }
   },
   computed: {
     types: () => ["form", "card", "button"],
     type () {
-      return this.theItem.type
+      return this.item.type || "form"
     },
   },
   methods: {
     ...mapMutations(['updateItem', 'deleteItem', 'copyItem', 'moveItemUp', 'moveItemDown', 'insertItemUp', 'insertItemDown']),
-    changeType (type) {
-      this.theItem.type = type
-    }
   }
 };
 </script>

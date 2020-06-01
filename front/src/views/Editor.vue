@@ -1,6 +1,6 @@
 <template>
   <div id="nc-editor">
-    <Item :data="item.data" v-for="item in items" :key="item.id"/>
+    <Item :item="item" v-for="item in items" :key="item.id"/>
     <a-button type="primary" @click="newItem">+</a-button>
   </div>
 </template>
